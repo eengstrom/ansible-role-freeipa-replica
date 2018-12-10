@@ -1,0 +1,38 @@
+---
+
+dependencies:
+  - { role: eengstrom.freeipa-common }
+  - { role: eengstrom.freeipa-client }
+  - { role: eengstrom.freeipa-server }
+
+galaxy_info:
+  description: FreeIPA Identity Management Replica provisioning.
+  author: Eric Engstrom
+  company: N/A
+  license: BSD-3-Clause
+  min_ansible_version: 2.5.0
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Fedora
+      versions:
+        - 26
+        - 27
+    - name: Ubuntu
+      versions:
+        - xenial
+        - artful
+        - bionic
+  galaxy_tags:
+    - dns
+    - freeipa
+    - replica
+    - identity
+    - idm
+    - kerberos
+    - ldap
+    - ntp
+    - sso
+    - sssd
+    - system

@@ -1,0 +1,30 @@
+---
+
+# IS this "server" a replica server?  IMPLICITLY, YES, since that's
+# the point of this role.  However, this variable is used UNUSUALLY in
+# that it is referenced from in `freeipa-server/defaults/main.yml`.
+# *YES*, in a different role.  This role is dependent upon
+# `freeipa-server`, but when installing as a replica server, we don't
+# run the normal `ipa-server-install` routine, but we want all the
+# other goodness of that role.
+# Type: Bool
+#freeipa_is_replica_server: "{{ freeipa_server_fqdn in freeipa_replicas }}"
+# It's much simpler than that: runing this role?  You must be a replica.
+# Plus, this avoids issues with standing up a new server if the
+# freeipa_* variables are not quite set right yet.
+freeipa_is_replica_server: true
+
+# Configure (aka "install") the FreeIPA replica
+# Type: Bool
+freeipa_replica_run_installer: true
+
+# The base command for the FreeIPA replica installation
+# Type: Str
+freeipa_replica_install_base_command: ipa-replica-install --unattended
+
+# The default FreeIPA replica installation options
+# Since host is already enrolled as a client, minimal args needed to promote.
+# Type: List
+freeipa_replica_install_options:
+  - "--principal={{ freeipa_admin_principal | mandatory }}"
+  - "--admin-password='{{ freeipa_admin_password | mandatory }}'"

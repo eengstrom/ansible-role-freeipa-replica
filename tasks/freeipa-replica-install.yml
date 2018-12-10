@@ -1,0 +1,14 @@
+---
+
+#- name: DEBUG Run the FreeIPA Replica installer
+#  debug:
+#    msg: |
+#      {{ freeipa_replica_install_base_command }}
+#      {{ freeipa_replica_install_options | join(' ') }}
+
+- name: Run the FreeIPA Replica installer
+  args:
+    creates: /etc/ipa/custodia/custodia.conf
+  command: >
+    {{ freeipa_replica_install_base_command }}
+    {{ freeipa_replica_install_options | join(' ') }}
